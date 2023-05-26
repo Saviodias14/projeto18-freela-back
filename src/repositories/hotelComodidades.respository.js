@@ -1,8 +1,8 @@
-import { db } from "../database/database.connection";
+import { db } from "../database/database.connection.js";
 
 export async function postHotelComodidades(hospedagemId, comodidadesId){
     comodidadesId.forEach(async element => {
-      await db.query(`INSERT INTO "hotelComodidades" ("hotelId", comodidadeId)
+      await db.query(`INSERT INTO "hotelComodidades" ("hotelId", "comodidadeId")
                     VALUES ($1, $2)`, [hospedagemId, element])  
     })
 }

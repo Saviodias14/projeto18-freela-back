@@ -1,4 +1,4 @@
-import { db } from "../database/database.connection";
+import { db } from "../database/database.connection.js";
 
 export async function postCompanhia(companhia){
     const result = await db.query(`SELECT companhia.id FROM companhia
