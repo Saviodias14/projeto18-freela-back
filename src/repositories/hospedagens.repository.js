@@ -12,7 +12,7 @@ export async function getHospedagem(destino, min, max){
     SELECT hospedagem.nome, hospedagem.preco, hospedagem."fotoPrincipal", "cidadeDestino".nome, MAX(hospedagem.preco) AS "maiorPreco"
     FROM hospedagem
     JOIN "cidadeDestino" ON "cidadeDestino".id = hospedagem."destinoId"
-    WHERE "cidadeDestino".nome = $1 
+    WHERE "cidadeDestino".id = $1 
     AND hospedagem.preco >= $2 
     AND hospedagem.preco <= $3
     GROUP BY hospedagem.nome, hospedagem.preco, hospedagem."fotoPrincipal", "cidadeDestino".nome
