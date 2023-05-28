@@ -13,8 +13,8 @@ export async function getPassagem(destino, origem, min, max) {
     FROM passagem p
     JOIN "cidadeDestino" ON "cidadeDestino".id = p."destinoId"
     JOIN "cidadeOrigem" ON "cidadeOrigem".id = p."origemId"
-    WHERE "cidadeDestino".nome = $1 
-    AND "cidadeOrigem".nome = $2
+    WHERE "cidadeDestino".id = $1 
+    AND "cidadeOrigem".id = $2
     AND p.preco >= $3
     AND p.preco <= $4
 	GROUP BY p.id, "cidadeDestino".nome, "cidadeOrigem".nome
@@ -23,12 +23,10 @@ export async function getPassagem(destino, origem, min, max) {
 
 export async function getPassagemById(id) {
     return await db.query(`
-    SELECT p.id, p."horaPartida", p."horaChegada", p.preco,companhia.nome AS companhia, "cidadeDestino".nome AS destino, "cidadeOrigem".nome AS origem, MAX(p.preco) AS "maiorPreco"
-    FROM passagem p
+    SELECT p.id, p."horaPartida", p."horaChegada", p.preco,companhia.nome AS companhia, "cidadeDestino".nome AS destino, "cidadeOrigem".nome AS origem    FROM passagem p
     JOIN "cidadeDestino" ON "cidadeDestino".id = p."destinoId"
     JOIN "cidadeOrigem" ON "cidadeOrigem".id = p."origemId"
 	JOIN companhia ON companhia.id = p."companhiaId"
     WHERE p.id=$1
-	GROUP BY p.id, "cidadeDestino".nome, "cidadeOrigem".nome, companhia.nome
   `, [id])
 }
