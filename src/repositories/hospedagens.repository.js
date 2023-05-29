@@ -9,13 +9,13 @@ export async function postHospedagem(nomeHotel, destinoId, preco, descricao, fot
 
 export async function getHospedagem(destino, min, max){
     return await db.query(`
-    SELECT hospedagem.nome, hospedagem.preco, hospedagem."fotoPrincipal", "cidadeDestino".nome, MAX(hospedagem.preco) AS "maiorPreco"
+    SELECT hospedagem.nome, hospedagem."nomeHotel", hospedagem.preco, hospedagem."fotoPrincipal", "cidadeDestino".nome, MAX(hospedagem.preco) AS "maiorPreco"
     FROM hospedagem
     JOIN "cidadeDestino" ON "cidadeDestino".id = hospedagem."destinoId"
     WHERE "cidadeDestino".id = $1 
     AND hospedagem.preco >= $2 
     AND hospedagem.preco <= $3
-    GROUP BY hospedagem.nome, hospedagem.preco, hospedagem."fotoPrincipal", "cidadeDestino".nome
+    GROUP BY hospedagem.nome, hospedagem."nomeHotel", hospedagem.preco, hospedagem."fotoPrincipal", "cidadeDestino".nome
   `, [destino, min, max])
 }
 
