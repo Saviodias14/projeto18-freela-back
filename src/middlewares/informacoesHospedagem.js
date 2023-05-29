@@ -1,6 +1,6 @@
 export default function organizaInformacoe(result) {
-    const { nomeHotel, preco, descricao, fotoPrincipal } = result.rows[0]
-    const resultTratado = { nome, cidade, preco, descricao, fotos: [fotoPrincipal], comodidades: [] }
+    const { nomeHotel, destino, preco, descricao, fotoPrincipal } = result.rows[0]
+    const resultTratado = { nomeHotel, destino, preco, descricao, fotos: [fotoPrincipal], comodidades: [] }
     result.rows.forEach((element) => {
         if (!resultTratado.fotos.includes(element.foto)) {
             resultTratado.fotos.push(element.foto)

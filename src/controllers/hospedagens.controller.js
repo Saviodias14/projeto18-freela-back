@@ -11,7 +11,6 @@ export async function criaHospedagen(req, res) {
         const destinoId = await postCidadeDestino(cidade)
         const hospedagemId = await postHospedagem(nomeHotel, destinoId.rows[0].id, preco, descricao, fotoPrincipal)
         const comodidadesId = await postComodidades(comodidades)
-        console.log(hospedagemId.rows[0].id)
         await postHotelComodidades(hospedagemId.rows[0].id, comodidadesId)
         await postFotos(hospedagemId.rows[0].id, fotos)
         res.sendStatus(201)
